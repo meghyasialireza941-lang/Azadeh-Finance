@@ -1349,7 +1349,7 @@ async function aiNativeFetch(model,msgs,tools,signal){
   const abort=new Promise((_,rej)=>{if(!signal)return;const f=()=>{const e=new Error('Aborted');e.name='AbortError';rej(e)};if(signal.aborted)f();else signal.addEventListener('abort',f)});
   for(let k=0;;k++){
     try{
-      const req=Capacitor.Plugins.CapacitorHttp.request({url:AI_URL,method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json','Authorization':'Bearer '+AI_KEY},data:{model,messages:msgs,tools,tool_choice:'auto',temperature:.3,max_tokens:1800,stream:false},responseType:'json',connectTimeout:30000,readTimeout:120000});
+      const req=Capacitor.Plugins.CapacitorHttp.request({url:AI_URL,method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json','Authorization':'Bearer '+AI_KEY,'Origin':'https://azadeh1364.netlify.app','Referer':'https://azadeh1364.netlify.app/','User-Agent':'Mozilla/5.0 (Linux; Android 14; Mobile) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36'},data:{model,messages:msgs,tools,tool_choice:'auto',temperature:.3,max_tokens:1800,stream:false},responseType:'json',connectTimeout:30000,readTimeout:120000});
       const n=await Promise.race([req,abort]);
       let d=n.data;if(typeof d==='string'){try{d=JSON.parse(d)}catch(e){}}
       if(k<2&&[429,500,502,503,504].includes(n.status)){await new Promise(z=>setTimeout(z,1200*(k+1)));continue}
@@ -1365,7 +1365,7 @@ async function aiAsk(msgs,onTok,tools,signal){
     else r=await aiFetch(AI_URL,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+AI_KEY},signal,body:JSON.stringify({model,messages:msgs,tools,tool_choice:'auto',temperature:.3,max_tokens:1800,stream:true})});
     if(!r.ok){
       let em='';try{em=(await r.json()).error.message}catch(e){}
-      if(r.status===401||r.status===403)throw new Error('کلید API معتبر نیست یا باطل شده است. (کد '+r.status+')');
+      if(r.status===401||r.status===403)throw new Error('کلید API معتبر نیست یا باطل شده است. (کد '+r.status+(em?' - '+String(em).slice(0,120):'')+')');
       if(r.status===429)throw new Error('سقف استفاده موقتاً پر شده؛ چند لحظه بعد دوباره تلاش کن.');
       last=em||('خطای سرور ('+r.status+')');
       if(r.status===400||r.status===404)continue;
