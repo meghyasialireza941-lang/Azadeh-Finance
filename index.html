@@ -1344,17 +1344,39 @@ async function aiFetch(u,o){
     catch(e){if(k>=2||(e&&e.name==='AbortError'))throw e;await new Promise(z=>setTimeout(z,1000*(k+1)))}
   }
 }
+const AI_NATIVE=()=>!!(window.Capacitor&&typeof Capacitor.isNativePlatform==='function'&&Capacitor.isNativePlatform()&&Capacitor.Plugins&&Capacitor.Plugins.CapacitorHttp);
+async function aiNativeFetch(model,msgs,tools,signal){
+  const abort=new Promise((_,rej)=>{if(!signal)return;const f=()=>{const e=new Error('Aborted');e.name='AbortError';rej(e)};if(signal.aborted)f();else signal.addEventListener('abort',f)});
+  for(let k=0;;k++){
+    try{
+      const req=Capacitor.Plugins.CapacitorHttp.request({url:AI_URL,method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json','Authorization':'Bearer '+AI_KEY},data:{model,messages:msgs,tools,tool_choice:'auto',temperature:.3,max_tokens:1800,stream:false},responseType:'json',connectTimeout:30000,readTimeout:120000});
+      const n=await Promise.race([req,abort]);
+      let d=n.data;if(typeof d==='string'){try{d=JSON.parse(d)}catch(e){}}
+      if(k<2&&[429,500,502,503,504].includes(n.status)){await new Promise(z=>setTimeout(z,1200*(k+1)));continue}
+      return{status:n.status,data:d};
+    }catch(e){if(k>=2||(e&&e.name==='AbortError'))throw e;await new Promise(z=>setTimeout(z,1000*(k+1)))}
+  }
+}
 async function aiAsk(msgs,onTok,tools,signal){
   let last='';
   for(const model of AI_MODELS){
-    const r=await aiFetch(AI_URL,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+AI_KEY},signal,body:JSON.stringify({model,messages:msgs,tools,tool_choice:'auto',temperature:.3,max_tokens:1800,stream:true})});
+    let r;
+    if(AI_NATIVE()){const n=await aiNativeFetch(model,msgs,tools,signal);r={ok:n.status>=200&&n.status<300,status:n.status,json:async()=>n.data,nat:n.data}}
+    else r=await aiFetch(AI_URL,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+AI_KEY},signal,body:JSON.stringify({model,messages:msgs,tools,tool_choice:'auto',temperature:.3,max_tokens:1800,stream:true})});
     if(!r.ok){
       let em='';try{em=(await r.json()).error.message}catch(e){}
-      if(r.status===401||r.status===403)throw new Error('کلید API معتبر نیست یا باطل شده است.');
+      if(r.status===401||r.status===403)throw new Error('کلید API معتبر نیست یا باطل شده است. (کد '+r.status+')');
       if(r.status===429)throw new Error('سقف استفاده موقتاً پر شده؛ چند لحظه بعد دوباره تلاش کن.');
       last=em||('خطای سرور ('+r.status+')');
       if(r.status===400||r.status===404)continue;
       throw new Error(last);
+    }
+    if(r.nat){
+      const m=(r.nat&&r.nat.choices&&r.nat.choices[0]&&r.nat.choices[0].message)||{};
+      const nc=(m.tool_calls||[]).map(tc=>({id:tc.id||'',name:(tc.function&&tc.function.name)||'',args:(tc.function&&tc.function.arguments)||''}));
+      const nt=typeof m.content==='string'?m.content:'';
+      if(nt)onTok(nt);
+      return{text:nt,calls:nc.filter(c=>c.name)};
     }
     const rdr=r.body.getReader(),dc=new TextDecoder(),calls=[];let buf='',out='';
     for(;;){
