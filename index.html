@@ -14,7 +14,7 @@
 <title>جعبه‌ابزار مالی آزاده</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://getvibeapi.com" crossorigin>
+<link rel="preconnect" href="https://api.groq.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
 <style>
@@ -621,9 +621,11 @@ body.ai-full .ai-ft{padding:6px max(10px,calc((100% - 820px)/2)) 8px}
     <div class="ai-hd">
       <span class="ai-av" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l1.9 5.6 5.6 1.9-5.6 1.9L12 18l-1.9-5.6-5.6-1.9 5.6-1.9z"/><path d="M19 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></svg></span>
       <div class="ai-ht"><b>مشاور مالی آزاده</b><small>مدیر مالی هوشمند</small></div>
+      <button class="ib" id="ai-key" aria-label="کلید API" title="کلید API"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M16 7l3 3M14 9l2 2"/></svg></button>
       <button class="ib del" id="ai-clr" aria-label="پاک کردن گفتگو" title="پاک کردن گفتگو"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4.5h6V7M6.5 7l.8 12.5h9.4L17.5 7M10 11v5M14 11v5"/></svg></button>
     </div>
     <div class="swr ai-acc"><span id="ai-cl">دسترسی مشاور به دفتر مالی و چک‌های من (خواندن، و ثبت با تأیید خودم)</span><button type="button" class="sw on" id="ai-cs" role="switch" aria-checked="true" aria-labelledby="ai-cl"></button></div>
+    <div class="swr ai-acc" id="ai-kb" hidden style="gap:8px"><input id="ai-ki" type="password" dir="ltr" placeholder="gsk_..." autocomplete="off" style="flex:1;min-width:0;padding:8px 10px;border-radius:12px;border:1px solid rgba(255,255,255,.3);background:rgba(0,0,0,.25);color:inherit;font-size:13px"><button type="button" class="ib" id="ai-ks" style="width:auto;padding:0 14px;border-radius:18px;font-size:13px">ذخیره</button></div>
     <div class="ai-hc" id="ai-hc" role="button" tabindex="0" hidden></div>
     <div class="ai-mw">
       <div class="aim" id="ai-m" aria-live="polite"></div>
@@ -1052,9 +1054,10 @@ $('ck-l').onclick=e=>{
 };
 
 /* ---------- AI finance advisor ---------- */
-const AI_KEY='sk-pv-d0787d754e62eb36ca1314447ab61e03';
-const AI_URL='https://getvibeapi.com/v1/chat/completions';
-const AI_MODELS=['deepseek-v4-flash-0731:free'];
+const AI_KEYST='azadehAIKey';
+let AI_KEY='';try{AI_KEY=(localStorage.getItem(AI_KEYST)||'').trim()}catch(e){}
+const AI_URL='https://api.groq.com/openai/v1/chat/completions';
+const AI_MODELS=['openai/gpt-oss-120b'];
 const AI_ST='azadeFinanceAIV1';
 const AI_SYS=`تو «مشاور مالی آزاده» هستی؛ یک مدیر مالی باتجربه، دقیق و صادق که داخل «جعبه‌ابزار مالی آزاده» کار می‌کنی.
 قلمرو تو فقط مسائل مالی است: حسابداری و دفترداری، درآمد و هزینه، بودجه‌بندی، جریان نقدینگی، چک و سررسید، وصول مطالبات، وام و اقساط، حقوق و دستمزد، مالیات و ارزش‌افزوده و بیمه (در حد آگاهی عمومی)، قیمت‌گذاری، حاشیه سود، نقطه سر به سر، بازده سرمایه، پس‌انداز و سرمایه‌گذاری، تورم، ارز و مدیریت مالی کسب‌وکار و مالی شخصی.
@@ -1349,7 +1352,7 @@ async function aiNativeFetch(model,msgs,tools,signal){
   const abort=new Promise((_,rej)=>{if(!signal)return;const f=()=>{const e=new Error('Aborted');e.name='AbortError';rej(e)};if(signal.aborted)f();else signal.addEventListener('abort',f)});
   for(let k=0;;k++){
     try{
-      const req=Capacitor.Plugins.CapacitorHttp.request({url:AI_URL,method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json','Authorization':'Bearer '+AI_KEY,'Origin':'https://azadeh1364.netlify.app','Referer':'https://azadeh1364.netlify.app/','User-Agent':'Mozilla/5.0 (Linux; Android 14; Mobile) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36'},data:{model,messages:msgs,tools,tool_choice:'auto',temperature:.3,max_tokens:1800,stream:false},responseType:'json',connectTimeout:30000,readTimeout:120000});
+      const req=Capacitor.Plugins.CapacitorHttp.request({url:AI_URL,method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json','Authorization':'Bearer '+AI_KEY,'User-Agent':'Mozilla/5.0 (Linux; Android 14; Mobile) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36'},data:{model,messages:msgs,tools,tool_choice:'auto',temperature:.3,max_tokens:4000,reasoning_effort:'low',stream:false},responseType:'json',connectTimeout:30000,readTimeout:120000});
       const n=await Promise.race([req,abort]);
       let d=n.data;if(typeof d==='string'){try{d=JSON.parse(d)}catch(e){}}
       if(k<2&&[429,500,502,503,504].includes(n.status)){await new Promise(z=>setTimeout(z,1200*(k+1)));continue}
@@ -1359,12 +1362,14 @@ async function aiNativeFetch(model,msgs,tools,signal){
 }
 async function aiAsk(msgs,onTok,tools,signal){
   let last='';
+  if(!AI_KEY){aiKeyBox(true);throw new Error('اول کلید API را وارد کن (بالای صفحه، کادر کلید).')}
   for(const model of AI_MODELS){
     let r;
     if(AI_NATIVE()){const n=await aiNativeFetch(model,msgs,tools,signal);r={ok:n.status>=200&&n.status<300,status:n.status,json:async()=>n.data,nat:n.data}}
-    else r=await aiFetch(AI_URL,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+AI_KEY},signal,body:JSON.stringify({model,messages:msgs,tools,tool_choice:'auto',temperature:.3,max_tokens:1800,stream:true})});
+    else r=await aiFetch(AI_URL,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+AI_KEY},signal,body:JSON.stringify({model,messages:msgs,tools,tool_choice:'auto',temperature:.3,max_tokens:4000,reasoning_effort:'low',stream:true})});
     if(!r.ok){
       let em='';try{em=(await r.json()).error.message}catch(e){}
+      if(r.status===401||r.status===403){aiKeyBox(true)}
       if(r.status===401||r.status===403)throw new Error('کلید API معتبر نیست یا باطل شده است. (کد '+r.status+(em?' - '+String(em).slice(0,120):'')+')');
       if(r.status===429)throw new Error('سقف استفاده موقتاً پر شده؛ چند لحظه بعد دوباره تلاش کن.');
       last=em||('خطای سرور ('+r.status+')');
@@ -1467,6 +1472,10 @@ $('ai-stop').onclick=()=>{if(aiAbort)aiAbort.abort()};
 $('ai-dn').onclick=()=>{const m=$('ai-m');m.scrollTop=m.scrollHeight;aiFab()};
 $('ai-m').addEventListener('scroll',aiFab,{passive:true});
 addEventListener('resize',aiVV);if(window.visualViewport)visualViewport.addEventListener('resize',aiVV);aiVV();
+function aiKeyBox(show){const b=$('ai-kb');if(!b)return;b.hidden=!show;if(show){$('ai-ki').value='';setTimeout(()=>$('ai-ki').focus(),50)}}
+$('ai-key').onclick=()=>aiKeyBox($('ai-kb').hidden);
+$('ai-ks').onclick=()=>{const v=$('ai-ki').value.trim();if(!v)return;AI_KEY=v;try{localStorage.setItem(AI_KEYST,v)}catch(e){}aiKeyBox(false);if(typeof toast==='function')toast('کلید ذخیره شد')};
+if(!AI_KEY)setTimeout(()=>aiKeyBox(true),300);
 $('ai-cs').onclick=()=>{aiOn=!aiOn;aiSave();aiRender()};
 $('ai-clr').onclick=async()=>{if(aiBusy||!aiH.length)return;if(!await ask('گفتگوی مشاور مالی پاک شود؟','پاک کن'))return;aiH=[];aiSave();aiRender()};
 $('tabs').addEventListener('click',e=>{if(e.target.closest('.tab[data-t="ai"]'))setTimeout(()=>{const m=$('ai-m');m.scrollTop=m.scrollHeight},0)});
