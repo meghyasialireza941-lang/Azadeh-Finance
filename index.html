@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#7a0a16">
+<meta name="theme-color" content="#142470">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="icon-192.png">
@@ -14,7 +14,7 @@
 <title>جعبه‌ابزار مالی آزاده</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://api.groq.com" crossorigin>
+<link rel="preconnect" href="https://azadeh-ai.cbzmjceyudks.workers.dev" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
 <style>
@@ -384,8 +384,57 @@ body{padding-top:14px}
 body:not(.ai-full) .wrap{padding-top:50px}
 .thm{top:0}
 body.ai-full .thm{top:5px}
+
+/* ---------- Splash 8s ---------- */
+#intro8{position:fixed;inset:0;z-index:2147483000;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fbf2f1;font-family:'Vazirmatn',system-ui,sans-serif;padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0);opacity:1;transition:opacity .6s ease;background:radial-gradient(760px 560px at 50% 38%,rgba(255,80,60,.34),transparent 66%),linear-gradient(165deg,#2e0008,#16000a 60%,#280007)}
+html.blue #intro8{color:#f2f3fa;background:radial-gradient(760px 560px at 50% 38%,rgba(78,93,237,.36),transparent 66%),linear-gradient(165deg,#040b2a,#020714 60%,#040a24)}
+html.gold #intro8{color:#f3e6bd;background:radial-gradient(760px 560px at 50% 38%,rgba(255,200,70,.2),transparent 66%),#000}
+#intro8.out{opacity:0;pointer-events:none}
+#intro8 .in8-orb{position:absolute;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,var(--gold),transparent 70%);opacity:0;animation:in8Orb 8s ease-in-out forwards}
+#intro8 .in8-orb.a{top:-110px;right:-90px}
+#intro8 .in8-orb.b{bottom:-120px;left:-100px;animation-delay:.3s}
+@keyframes in8Orb{0%{opacity:0;transform:scale(.6)}25%{opacity:.5}60%{opacity:.38;transform:scale(1.12) translate(10px,-14px)}100%{opacity:.32;transform:scale(1)}}
+#intro8 .in8-logo{position:relative;z-index:2;width:150px;height:150px;display:grid;place-items:center;opacity:0;transform:scale(.3) rotate(-20deg);animation:in8Logo 1.3s cubic-bezier(.2,1.3,.4,1) .3s forwards}
+@keyframes in8Logo{to{opacity:1;transform:scale(1) rotate(0)}}
+#intro8 .in8-a{position:relative;z-index:2;width:150px;height:150px;overflow:visible;filter:drop-shadow(0 0 12px var(--gold)) drop-shadow(0 10px 24px rgba(0,0,0,.5));animation:in8Float 3s ease-in-out 1.8s infinite,in8Glow 2s ease-in-out 1.8s infinite alternate}
+#intro8 .in8-a path{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1}
+#intro8 .in8-a .l1{stroke:url(#in8ag);stroke-width:15;animation:in8Draw .9s ease .5s forwards}
+#intro8 .in8-a .l2{stroke:url(#in8ag);stroke-width:15;animation:in8Draw .9s ease 1.05s forwards}
+#intro8 .in8-a .l3{stroke:url(#in8ag);stroke-width:12;animation:in8Draw .5s ease 1.7s forwards}
+#intro8 .in8-a .sw{stroke:#ffd36b;stroke-width:7;animation:in8Draw 1.2s ease 1.9s forwards}
+@keyframes in8Glow{from{filter:drop-shadow(0 0 8px var(--gold)) drop-shadow(0 10px 24px rgba(0,0,0,.5))}to{filter:drop-shadow(0 0 24px var(--gold)) drop-shadow(0 10px 24px rgba(0,0,0,.5))}}
+@keyframes in8Float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes in8Spin{to{transform:rotate(360deg)}}
+#intro8 .in8-orbit{position:absolute;left:50%;top:50%;width:0;height:0;z-index:1;animation:in8Spin 9s linear infinite}
+#intro8 .in8-oc{position:absolute;left:0;top:0;transform:rotate(var(--a)) translateX(var(--r))}
+#intro8 .in8-cw{position:absolute;left:0;top:0;animation:in8Spin 9s linear infinite reverse}
+#intro8 .in8-coin{position:absolute;left:0;top:0;width:var(--w);height:var(--w);margin:calc(var(--w)/-2) 0 0 calc(var(--w)/-2);animation:in8Wob 1.8s ease-in-out infinite;animation-delay:calc(var(--ph)*-1)}
+@keyframes in8Wob{0%,100%{transform:scaleX(1)}50%{transform:scaleX(.22)}}
+#intro8 .in8-cf{position:absolute;inset:0;border-radius:50%;opacity:0;animation:in8Cf 3.2s linear infinite;box-shadow:inset 0 0 0 calc(var(--w)*.07) var(--rim),inset 0 0 0 calc(var(--w)*.13) rgba(0,0,0,.18),0 4px 16px var(--glow)}
+#intro8 .in8-cf::after{content:"";position:absolute;inset:27%;background:rgba(255,255,255,.6);clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+#intro8 .in8-cf.r{--rim:#ffb3ad;--glow:rgba(255,60,50,.7);background:radial-gradient(circle at 32% 28%,#ffd0cb,#ff4a3d 45%,#a3081a 100%);animation-delay:calc(1.6s - var(--ph))}
+#intro8 .in8-cf.b{--rim:#bcc6ff;--glow:rgba(76,93,236,.7);background:radial-gradient(circle at 32% 28%,#d3d9ff,#4c5dec 45%,#1c30db 100%);animation-delay:calc(var(--ph)*-1)}
+@keyframes in8Cf{0%{opacity:0}6%{opacity:1}44%{opacity:1}54%{opacity:0}100%{opacity:0}}
+#intro8 .in8-rise{position:absolute;bottom:-40px;left:var(--x);width:0;height:0;opacity:0;animation:in8Rise var(--d) linear var(--l) infinite}
+@keyframes in8Rise{0%{transform:translate(0,0);opacity:0}12%{opacity:1}88%{opacity:1}100%{transform:translate(var(--sw),-115vh);opacity:0}}
+#intro8 .in8-title{position:relative;z-index:3;margin-top:34px;font-size:34px;font-weight:800;letter-spacing:.5px;direction:ltr;background:linear-gradient(100deg,#fff 0%,var(--gb) 32%,var(--gold) 50%,var(--gb) 68%,#fff 100%);background-size:260% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent;opacity:0;transform:translateY(24px);animation:in8Up .9s ease 1.5s forwards,in8Shine 3s linear 2.4s infinite}
+@keyframes in8Up{to{opacity:1;transform:translateY(0)}}
+@keyframes in8Shine{to{background-position:-160% 0}}
+#intro8 .in8-sub{position:relative;z-index:3;margin-top:8px;font-size:17px;font-weight:600;color:var(--gb);opacity:0;transform:translateY(18px);animation:in8Up .9s ease 2.1s forwards}
+#intro8 .in8-chart{position:relative;z-index:3;margin-top:30px;width:230px;height:92px;opacity:0;animation:in8Up .8s ease 2.6s forwards}
+#intro8 .in8-chart svg{width:100%;height:100%;overflow:visible}
+#intro8 .in8-bar{transform-box:fill-box;transform-origin:bottom;transform:scaleY(0);animation:in8Bar .8s cubic-bezier(.2,1.2,.4,1) forwards}
+@keyframes in8Bar{to{transform:scaleY(1)}}
+#intro8 .in8-line{stroke-dasharray:300;stroke-dashoffset:300;animation:in8Draw 1.8s ease 3.4s forwards}
+@keyframes in8Draw{to{stroke-dashoffset:0}}
+#intro8 .in8-arrow{opacity:0;animation:in8Up .5s ease 5.1s forwards}
+#intro8 .in8-tag{position:relative;z-index:3;margin-top:24px;font-size:15px;color:var(--tx,#fff);opacity:0;animation:in8Tag 2.6s ease 4.8s forwards}
+@keyframes in8Tag{0%{opacity:0;transform:translateY(12px)}30%,100%{opacity:1;transform:translateY(0)}}
+#intro8 .in8-bar-wrap{position:absolute;bottom:calc(46px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);width:200px;height:4px;border-radius:5px;background:rgba(255,255,255,.14);overflow:hidden;z-index:3}
+#intro8 .in8-bar-wrap i{display:block;height:100%;width:0;border-radius:5px;background:linear-gradient(90deg,var(--gd),var(--gold),var(--gb));animation:in8Prog 7.4s linear forwards}
+@keyframes in8Prog{to{width:100%}}
 </style>
-<script>try{if(localStorage.getItem('azadeFinanceTheme')==='blue')document.documentElement.classList.add('blue')}catch(e){}document.documentElement.classList.add('boot')</script>
+<script>try{if(localStorage.getItem('azadeFinanceTheme2')!=='red')document.documentElement.classList.add('blue')}catch(e){document.documentElement.classList.add('blue')}document.documentElement.classList.add('boot')</script>
 <style>
 /* ===== intro animation ===== */
 #splash{overflow:hidden;gap:0;background:radial-gradient(720px 520px at 50% 40%,rgba(255,80,60,.30),transparent 66%),linear-gradient(165deg,#2e0008,#16000a 60%,#280007);animation:spx .8s cubic-bezier(.4,0,.2,1) 3.1s forwards}
@@ -521,6 +570,59 @@ body.ai-full .ai-ft{padding:6px max(10px,calc((100% - 820px)/2)) 8px}
 </style>
 </head>
 <body>
+<div id="intro8" aria-hidden="true">
+<i class="in8-orb a"></i><i class="in8-orb b"></i>
+<div class="in8-logo"><div class="in8-orbit" id="in8o"></div><svg class="in8-a" viewBox="0 0 160 160" aria-hidden="true">
+<defs><linearGradient id="in8ag" gradientUnits="userSpaceOnUse" x1="0" y1="22" x2="0" y2="138"><stop offset="0" style="stop-color:#fff"/><stop offset=".45" style="stop-color:var(--gb)"/><stop offset="1" style="stop-color:var(--gold)"/></linearGradient></defs>
+<path class="l1" pathLength="1" d="M80 22 L32 138"/>
+<path class="l2" pathLength="1" d="M80 22 L128 138"/>
+<path class="l3" pathLength="1" d="M54 102 L106 102"/>
+<path class="sw" pathLength="1" d="M14 112 C62 118 118 92 146 40 M126 38 L148 36 L146 58"/>
+</svg></div>
+<div class="in8-title">Azadeh Finance</div>
+<div class="in8-sub">جعبه‌ابزار مالی آزاده</div>
+<div class="in8-chart"><svg viewBox="0 0 230 92" fill="none">
+<defs><linearGradient id="in8g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--gb)"/><stop offset="1" style="stop-color:var(--gd)"/></linearGradient></defs>
+<rect class="in8-bar" x="14" y="56" width="26" height="36" rx="6" fill="url(#in8g)" style="animation-delay:2.8s"/>
+<rect class="in8-bar" x="56" y="42" width="26" height="50" rx="6" fill="url(#in8g)" style="animation-delay:3.05s"/>
+<rect class="in8-bar" x="98" y="48" width="26" height="44" rx="6" fill="url(#in8g)" style="animation-delay:3.3s"/>
+<rect class="in8-bar" x="140" y="26" width="26" height="66" rx="6" fill="url(#in8g)" style="animation-delay:3.55s"/>
+<rect class="in8-bar" x="182" y="10" width="26" height="82" rx="6" fill="url(#in8g)" style="animation-delay:3.8s"/>
+<path class="in8-line" d="M6 62 C40 50 62 34 100 40 S160 18 214 2" stroke="#ffd36b" stroke-width="4" stroke-linecap="round"/>
+<path class="in8-arrow" d="M200 1 L216 1 L216 17" stroke="#ffd36b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg></div>
+<div class="in8-tag">مشاور مالی هوشمند، همیشه همراه تو ✨</div>
+<div class="in8-bar-wrap"><i></i></div>
+</div>
+<script>
+(function(){
+  var sp=document.getElementById('intro8');if(!sp)return;
+  function coin(w,ph){
+    var c=document.createElement('div');c.className='in8-coin';
+    c.style.setProperty('--w',w+'px');c.style.setProperty('--ph',ph+'s');
+    c.innerHTML='<i class="in8-cf b"></i><i class="in8-cf r"></i>';
+    return c;
+  }
+  var orb=document.getElementById('in8o');
+  if(orb){
+    for(var i=0;i<6;i++){
+      var oc=document.createElement('div');oc.className='in8-oc';
+      oc.style.setProperty('--a',(i*60)+'deg');oc.style.setProperty('--r','104px');
+      var cw=document.createElement('div');cw.className='in8-cw';
+      cw.appendChild(coin(i%2?26:34,(i*0.8)%3.2));
+      oc.appendChild(cw);orb.appendChild(oc);
+    }
+  }
+  for(var j=0;j<9;j++){
+    var r=document.createElement('div');r.className='in8-rise';
+    r.style.cssText='--x:'+(6+Math.random()*88)+'%;--d:'+(4.5+Math.random()*3)+'s;--l:'+(Math.random()*4.5)+'s;--sw:'+((Math.random()*60-30))+'px';
+    r.appendChild(coin(16+Math.round(Math.random()*14),(j*0.7)%3.2));
+    sp.appendChild(r);
+  }
+  setTimeout(function(){sp.classList.add('out')},7400);
+  setTimeout(function(){if(sp.parentNode)sp.parentNode.removeChild(sp)},8000);
+})();
+</script>
 <div class="scene" aria-hidden="true"><i class="blob"></i><i class="o o1"></i><i class="o o2"></i><i class="o o3"></i><i class="ring"></i><i class="coin"></i></div>
 <div class="wrap">
 <div class="warn" id="warn" role="alert" hidden>ذخیره‌سازی مرورگر در این محیط در دسترس نیست؛ با بستن صفحه اطلاعات از بین می‌رود.</div>
@@ -621,11 +723,9 @@ body.ai-full .ai-ft{padding:6px max(10px,calc((100% - 820px)/2)) 8px}
     <div class="ai-hd">
       <span class="ai-av" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l1.9 5.6 5.6 1.9-5.6 1.9L12 18l-1.9-5.6-5.6-1.9 5.6-1.9z"/><path d="M19 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></svg></span>
       <div class="ai-ht"><b>مشاور مالی آزاده</b><small>مدیر مالی هوشمند</small></div>
-      <button class="ib" id="ai-key" aria-label="کلید API" title="کلید API"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M16 7l3 3M14 9l2 2"/></svg></button>
       <button class="ib del" id="ai-clr" aria-label="پاک کردن گفتگو" title="پاک کردن گفتگو"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4.5h6V7M6.5 7l.8 12.5h9.4L17.5 7M10 11v5M14 11v5"/></svg></button>
     </div>
     <div class="swr ai-acc"><span id="ai-cl">دسترسی مشاور به دفتر مالی و چک‌های من (خواندن، و ثبت با تأیید خودم)</span><button type="button" class="sw on" id="ai-cs" role="switch" aria-checked="true" aria-labelledby="ai-cl"></button></div>
-    <div class="swr ai-acc" id="ai-kb" hidden style="gap:8px"><input id="ai-ki" type="password" dir="ltr" placeholder="gsk_..." autocomplete="off" style="flex:1;min-width:0;padding:8px 10px;border-radius:12px;border:1px solid rgba(255,255,255,.3);background:rgba(0,0,0,.25);color:inherit;font-size:13px"><button type="button" class="ib" id="ai-ks" style="width:auto;padding:0 14px;border-radius:18px;font-size:13px">ذخیره</button></div>
     <div class="ai-hc" id="ai-hc" role="button" tabindex="0" hidden></div>
     <div class="ai-mw">
       <div class="aim" id="ai-m" aria-live="polite"></div>
@@ -1054,9 +1154,7 @@ $('ck-l').onclick=e=>{
 };
 
 /* ---------- AI finance advisor ---------- */
-const AI_KEYST='azadehAIKey';
-let AI_KEY='';try{AI_KEY=(localStorage.getItem(AI_KEYST)||'').trim()}catch(e){}
-const AI_URL='https://api.groq.com/openai/v1/chat/completions';
+const AI_URL='https://azadeh-ai.cbzmjceyudks.workers.dev/chat'; /* آدرس Worker کلودفلر؛ کلید فقط داخل Worker است */
 const AI_MODELS=['openai/gpt-oss-120b'];
 const AI_ST='azadeFinanceAIV1';
 const AI_SYS=`تو «مشاور مالی آزاده» هستی؛ یک مدیر مالی باتجربه، دقیق و صادق که داخل «جعبه‌ابزار مالی آزاده» کار می‌کنی.
@@ -1083,9 +1181,20 @@ const AI_SYS2=AI_SYS+`
 - برای بودجه‌بندی از قاعده‌هایی مثل ۵۰/۳۰/۲۰ به‌عنوان نقطه شروع استفاده و با داده‌ی واقعی کاربر شخصی‌سازی کن.
 - اگر سؤال مبهم است فقط یک سؤال روشن‌کننده بپرس، نه چند تا.
 - اعداد را فارسی و با جداکننده‌ی هزارگان بنویس.
-- آخرین خط هر پاسخ را دقیقاً به این شکل بنویس: «پیشنهادها: سؤال کوتاه اول | سؤال کوتاه دوم | سؤال کوتاه سوم» (هر کدام حداکثر ۷ کلمه و از زبان کاربر، مثل چیزی که کاربر در ادامه می‌پرسد).`;
+- آخرین خط هر پاسخ را دقیقاً به این شکل بنویس: «پیشنهادها: سؤال کوتاه اول | سؤال کوتاه دوم | سؤال کوتاه سوم» (هر کدام حداکثر ۷ کلمه و از زبان کاربر، مثل چیزی که کاربر در ادامه می‌پرسد). پیشنهادها را هرگز تکرار نکن: نه سؤال‌های قبلی کاربر و نه پیشنهادهای پاسخ‌های قبلی؛ هر بار موضوع و زاویه‌ی تازه و مرتبط با وضعیت واقعی کاربر انتخاب کن.`;
 const AI_HI='سلام! من مشاور و مدیر مالی هوشمند تو هستم. هر محاسبه‌ای را با ابزارهای سایت برایت انجام می‌دهم و اگر بخواهی تراکنش و چک هم ثبت می‌کنم. هر موضوع مالی را بپرس.';
-const AI_SG=['وضعیت مالی این ماه من را کامل تحلیل کن','برای کاهش هزینه‌هایم چه پیشنهادی داری؟','یک بودجه‌ی ماهانه بر اساس درآمدم بچین','کدام چک‌ها نزدیک سررسیدند و چطور مدیریتشان کنم؟','قسط وام ۳۰۰ میلیون تومان با سود ۲۳٪ در ۳۶ ماه چقدر است؟','یک هزینه اجاره ۱۰ میلیون تومانی ثبت کن'];const AI_SG_OLD=['وضعیت مالی این ماه من را تحلیل کن','قسط وام ۳۰۰ میلیون تومان با سود ۲۳٪ در ۳۶ ماه چقدر است؟','کدام چک‌ها نزدیک سررسیدند؟','یک هزینه اجاره ۱۰ میلیون تومانی ثبت کن'];
+const AI_POOL=["وضعیت مالی این ماه من را کامل تحلیل کن", "برای کاهش هزینه‌هایم چه پیشنهادی داری؟", "یک بودجه‌ی ماهانه بر اساس درآمدم بچین", "کدام چک‌ها نزدیک سررسیدند و چطور مدیریتشان کنم؟", "قسط وام ۳۰۰ میلیون تومان با سود ۲۳٪ در ۳۶ ماه چقدر است؟", "یک هزینه اجاره ۱۰ میلیون تومانی ثبت کن", "بزرگ‌ترین دسته‌ی هزینه‌ی من کدام است؟", "چطور صندوق اضطراری بسازم؟", "پس‌انداز ماهانه‌ام را چطور بیشتر کنم؟", "هزینه‌های غیرضروری من را پیدا کن", "پیش‌بینی پایان ماه من چطور است؟", "درآمد این ماهم را با ماه قبل مقایسه کن", "یک چک جدید برایم ثبت کن", "برای خرید خانه چطور پس‌انداز کنم؟", "تفاوت سپرده بانکی و صندوق درآمد ثابت چیست؟", "چطور بدهی‌هایم را زودتر تسویه کنم؟", "قاعده ۵۰/۳۰/۲۰ را روی درآمد من اجرا کن", "هزینه‌ی خوراک من نسبت به درآمدم زیاد است؟", "برای سفر یک بودجه‌ی ماهانه بچین", "سود مرکب ۲۰ میلیون در ۵ سال چقدر می‌شود؟", "چک‌های معوق من چقدر است؟", "چطور هزینه‌های ثابتم را کم کنم؟", "یک هدف پس‌انداز برای سال آینده تعیین کن", "روند هزینه‌هایم در ۶ ماه اخیر چگونه است؟", "ارزش‌افزوده‌ی یک فاکتور ۵۰ میلیونی چقدر است؟", "قیمت فروش با حاشیه سود ۲۵٪ را حساب کن", "چطور از تورم در امان بمانم؟", "برای حقوقم یک برنامه‌ی خرج‌کرد بنویس", "نرخ پس‌انداز من الان چند درصد است؟", "کدام هزینه‌هایم این ماه غیرعادی بود؟", "چه زمانی برای سرمایه‌گذاری آماده‌ام؟", "چطور اقساط وامم را مدیریت کنم؟", "یک هزینه‌ی خوراک ۲ میلیونی ثبت کن", "درآمد حقوق ۴۰ میلیونی ثبت کن", "برای عروسی یا مراسم چطور پس‌انداز کنم؟", "چطور چند منبع درآمد داشته باشم؟", "چک‌های هفته‌ی آینده‌ام را مرور کن", "یک چالش بی‌خرج‌ی یک‌هفته‌ای پیشنهاد بده", "تفاوت هزینه ثابت و متغیر را با داده‌ی من نشان بده", "چطور قبل از پایان ماه نقدینگی‌ام را حفظ کنم؟", "نکته‌ی مالی امروز را بگو", "مالیات و بیمه‌ی درآمدم را چطور برآورد کنم؟"];
+const AI_SGK='azadeAiSgSeen';
+function aiPick(n){let seen=[];try{const a=JSON.parse(localStorage.getItem(AI_SGK));if(Array.isArray(a))seen=a.filter(x=>typeof x==='string')}catch(e){}
+  let left=AI_POOL.filter(q=>!seen.includes(q));
+  if(left.length<n){seen=[];left=AI_POOL.slice()}
+  for(let i=left.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[left[i],left[j]]=[left[j],left[i]]}
+  const out=left.slice(0,n);
+  try{localStorage.setItem(AI_SGK,JSON.stringify(seen.concat(out)))}catch(e){}
+  return out}
+let aiWSg=null;
+const aiNorm=t=>String(t||'').replace(/[\s؟?!.،,:؛]+/g,' ').trim();
+const aiUnseen=q=>{const u=new Set(aiH.filter(m=>m.role==='user').map(m=>aiNorm(m.content)));return q.filter(x=>!u.has(aiNorm(x)))};const AI_SG_OLD=['وضعیت مالی این ماه من را تحلیل کن','قسط وام ۳۰۰ میلیون تومان با سود ۲۳٪ در ۳۶ ماه چقدر است؟','کدام چک‌ها نزدیک سررسیدند؟','یک هزینه اجاره ۱۰ میلیون تومانی ثبت کن'];
 let aiH=[],aiOn=true,aiBusy=false,aiSt='';
 try{const s=JSON.parse(localStorage.getItem(AI_ST));if(s){aiH=(Array.isArray(s.h)?s.h:[]).filter(m=>m&&(m.role==='user'||m.role==='assistant')&&typeof m.content==='string'&&m.content).slice(-30);aiOn=s.on!==false}}catch(e){}
 const aiSave=()=>{D.ai={h:aiH.slice(-30),on:aiOn};save()};
@@ -1182,9 +1291,10 @@ function aiRender0(){
   aiCodes=[];
   let h='';
   if(!aiH.length){
+    if(!aiWSg)aiWSg=aiPick(4);
     const k=AI_HI.indexOf('. ');
-    h='<div class="aw"><span class="ai-av">'+AI_IC.spark+'</span><h2>'+esc(k>0?AI_HI.slice(0,k):AI_HI)+'</h2><p>'+esc(k>0?AI_HI.slice(k+2):'')+'</p><div class="sg">'+AI_SG.map(q=>'<button type="button" data-q="'+esc(q)+'">'+esc(q)+'</button>').join('')+'</div></div>';
-  }else h=aiH.map((x,i)=>{
+    h='<div class="aw"><span class="ai-av">'+AI_IC.spark+'</span><h2>'+esc(k>0?AI_HI.slice(0,k):AI_HI)+'</h2><p>'+esc(k>0?AI_HI.slice(k+2):'')+'</p><div class="sg">'+aiWSg.map(q=>'<button type="button" data-q="'+esc(q)+'">'+esc(q)+'</button>').join('')+'</div></div>';
+  }else{aiWSg=null;h=aiH.map((x,i)=>{
     const last=i===aiH.length-1;
     if(x.role==='user')return'<div class="ar u"><div class="am-col"><div class="aib u">'+esc(x.content)+'</div><div class="ac">'+aiBtn('cu',i,AI_IC.copy,'کپی پیام')+(aiBusy?'':aiBtn('ed',i,AI_IC.edit,'ویرایش پیام'))+'</div></div></div>';
     const av='<span class="ai-av sm">'+AI_IC.spark+'</span>';
@@ -1192,7 +1302,7 @@ function aiRender0(){
     const live=aiBusy&&last;
     const acts=live?'':'<div class="ac">'+aiBtn('ca',i,AI_IC.copy,'کپی پاسخ')+aiBtn('up',i,AI_IC.up,'پاسخ خوب بود',x.fb==='up'?'on':'')+aiBtn('dn',i,AI_IC.dn,'پاسخ خوب نبود',x.fb==='dn'?'on':'')+(last&&!aiBusy?aiBtn('re',i,AI_IC.redo,'تولید دوباره'):'')+(navigator.share?aiBtn('sh',i,AI_IC.share,'اشتراک‌گذاری'):'')+'</div>';
     return'<div class="ar a">'+av+'<div class="am-col"><div class="aib a">'+aiMd(x.content)+(x.tl&&x.tl.length?'<div class="aitl">🛠 '+esc(x.tl.join('، '))+'</div>':'')+'</div>'+acts+'</div></div>';
-  }).join('');
+  }).join('')}
   m.innerHTML=h;
   $('ai-cs').classList.toggle('on',aiOn);$('ai-cs').setAttribute('aria-checked',aiOn);
   $('ai-s').hidden=aiBusy;$('ai-stop').hidden=!aiBusy;$('ai-s').disabled=aiBusy||!$('ai-i').value.trim();
@@ -1244,11 +1354,12 @@ function aiExtra(){
     hc.innerHTML='<div class="rg" style="--p:'+s.sc+';--c:'+col+'"><span>'+pd(s.sc)+'</span></div><div class="tx"><b>سلامت مالی: '+lab+'</b>'+(s.rate!=null?'پس‌انداز '+pd(Math.round(s.rate*100))+'٪':'ثبت درآمد برای محاسبه لازم است')+(s.od.length?' · '+pd(s.od.length)+' چک معوق':'')+' · برای تحلیل کامل لمس کن</div>';
   }
   const last=aiH[aiH.length-1];let q=[];
-  if(!aiBusy&&last&&last.role==='assistant')q=aiSugs(last.content);
+  if(!aiBusy&&last&&last.role==='assistant')q=aiUnseen(aiSugs(last.content));
   if(!q.length&&!aiBusy&&aiH.length){
     q=['خلاصه‌ی وضعیت مالی‌ام را بگو'];
     if(aiOn){if(s.od.length)q.push('چک‌های معوقم را چطور مدیریت کنم؟');if(s.rate!=null&&s.rate<.1)q.push('چطور هزینه‌هایم را کم کنم؟');else q.push('پس‌اندازم را چطور سرمایه‌گذاری کنم؟')}
   }
+  q=aiUnseen(q);
   const k=aiBusy?'':q.join('¦');
   if(k!==aiXK){aiXK=k;$('ai-qb').innerHTML=q.map(x=>'<button type="button" data-q="'+esc(x)+'">'+esc(x)+'</button>').join('');$('ai-qb').hidden=!q.length}
 }
@@ -1352,7 +1463,7 @@ async function aiNativeFetch(model,msgs,tools,signal){
   const abort=new Promise((_,rej)=>{if(!signal)return;const f=()=>{const e=new Error('Aborted');e.name='AbortError';rej(e)};if(signal.aborted)f();else signal.addEventListener('abort',f)});
   for(let k=0;;k++){
     try{
-      const req=Capacitor.Plugins.CapacitorHttp.request({url:AI_URL,method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json','Authorization':'Bearer '+AI_KEY,'User-Agent':'Mozilla/5.0 (Linux; Android 14; Mobile) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36'},data:{model,messages:msgs,tools,tool_choice:'auto',temperature:.3,max_tokens:4000,reasoning_effort:'low',stream:false},responseType:'json',connectTimeout:30000,readTimeout:120000});
+      const req=Capacitor.Plugins.CapacitorHttp.request({url:AI_URL,method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json','User-Agent':'Mozilla/5.0 (Linux; Android 14; Mobile) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36'},data:{model,messages:msgs,tools,tool_choice:'auto',temperature:.3,max_tokens:4000,reasoning_effort:'low',stream:false},responseType:'json',connectTimeout:30000,readTimeout:120000});
       const n=await Promise.race([req,abort]);
       let d=n.data;if(typeof d==='string'){try{d=JSON.parse(d)}catch(e){}}
       if(k<2&&[429,500,502,503,504].includes(n.status)){await new Promise(z=>setTimeout(z,1200*(k+1)));continue}
@@ -1362,15 +1473,13 @@ async function aiNativeFetch(model,msgs,tools,signal){
 }
 async function aiAsk(msgs,onTok,tools,signal){
   let last='';
-  if(!AI_KEY){aiKeyBox(true);throw new Error('اول کلید API را وارد کن (بالای صفحه، کادر کلید).')}
   for(const model of AI_MODELS){
     let r;
     if(AI_NATIVE()){const n=await aiNativeFetch(model,msgs,tools,signal);r={ok:n.status>=200&&n.status<300,status:n.status,json:async()=>n.data,nat:n.data}}
-    else r=await aiFetch(AI_URL,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+AI_KEY},signal,body:JSON.stringify({model,messages:msgs,tools,tool_choice:'auto',temperature:.3,max_tokens:4000,reasoning_effort:'low',stream:true})});
+    else r=await aiFetch(AI_URL,{method:'POST',headers:{'Content-Type':'application/json'},signal,body:JSON.stringify({model,messages:msgs,tools,tool_choice:'auto',temperature:.3,max_tokens:4000,reasoning_effort:'low',stream:true})});
     if(!r.ok){
       let em='';try{em=(await r.json()).error.message}catch(e){}
-      if(r.status===401||r.status===403){aiKeyBox(true)}
-      if(r.status===401||r.status===403)throw new Error('کلید API معتبر نیست یا باطل شده است. (کد '+r.status+(em?' - '+String(em).slice(0,120):'')+')');
+      if(r.status===401||r.status===403)throw new Error('دسترسی به سرویس هوش مصنوعی مجاز نیست. (کد '+r.status+')');
       if(r.status===429)throw new Error('سقف استفاده موقتاً پر شده؛ چند لحظه بعد دوباره تلاش کن.');
       last=em||('خطای سرور ('+r.status+')');
       if(r.status===400||r.status===404)continue;
@@ -1472,10 +1581,6 @@ $('ai-stop').onclick=()=>{if(aiAbort)aiAbort.abort()};
 $('ai-dn').onclick=()=>{const m=$('ai-m');m.scrollTop=m.scrollHeight;aiFab()};
 $('ai-m').addEventListener('scroll',aiFab,{passive:true});
 addEventListener('resize',aiVV);if(window.visualViewport)visualViewport.addEventListener('resize',aiVV);aiVV();
-function aiKeyBox(show){const b=$('ai-kb');if(!b)return;b.hidden=!show;if(show){$('ai-ki').value='';setTimeout(()=>$('ai-ki').focus(),50)}}
-$('ai-key').onclick=()=>aiKeyBox($('ai-kb').hidden);
-$('ai-ks').onclick=()=>{const v=$('ai-ki').value.trim();if(!v)return;AI_KEY=v;try{localStorage.setItem(AI_KEYST,v)}catch(e){}aiKeyBox(false);if(typeof toast==='function')toast('کلید ذخیره شد')};
-if(!AI_KEY)setTimeout(()=>aiKeyBox(true),300);
 $('ai-cs').onclick=()=>{aiOn=!aiOn;aiSave();aiRender()};
 $('ai-clr').onclick=async()=>{if(aiBusy||!aiH.length)return;if(!await ask('گفتگوی مشاور مالی پاک شود؟','پاک کن'))return;aiH=[];aiSave();aiRender()};
 $('tabs').addEventListener('click',e=>{if(e.target.closest('.tab[data-t="ai"]'))setTimeout(()=>{const m=$('ai-m');m.scrollTop=m.scrollHeight},0)});
@@ -1512,7 +1617,7 @@ $('tabs').onclick=e=>{const b=e.target.closest('.tab');if(b)tab(b.dataset.t)};
   const hit=(x,y)=>{const w=C.offsetWidth,h=C.offsetHeight;if(!w)return false;const l=C.offsetLeft,tp=C.offsetTop;return x>=l-14&&x<=l+w+14&&y>=tp-40&&y<=tp+h+16};
   const bad=el=>!!(el&&el.closest&&el.closest('button,a,input,select,textarea,label,summary,[role=tab],.item,.hi,.chip,.ib'));
   let lt=0,last=0,lx=0,ly=0,sx=0,sy=0;
-  const flip=()=>{const n=Date.now();if(n-lt<500)return;lt=n;const on=!H.classList.contains('blue');set(on);try{localStorage.setItem('azadeFinanceTheme',on?'blue':'red')}catch(e){}try{getSelection().removeAllRanges()}catch(e){}};
+  const flip=()=>{const n=Date.now();if(n-lt<500)return;lt=n;const on=!H.classList.contains('blue');set(on);try{localStorage.setItem('azadeFinanceTheme2',on?'blue':'red')}catch(e){}try{getSelection().removeAllRanges()}catch(e){}};
   document.addEventListener('touchstart',e=>{const c=e.touches[0];if(c){sx=c.clientX;sy=c.clientY}},{passive:true});
   document.addEventListener('touchend',e=>{
     const c=e.changedTouches&&e.changedTouches[0];if(!c||e.touches.length)return;
